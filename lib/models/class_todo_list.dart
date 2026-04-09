@@ -20,3 +20,16 @@ class ToDoObject {
   bool isComplete;
   CategoryOptions category;
 }
+
+final List<ToDoObject> completeToDoList = [
+  ToDoObject(
+    title: 'First card',
+    isComplete: false,
+    category: CategoryOptions.work,
+  ),
+  ToDoObject(
+    title: 'Second card',
+    isComplete: false,
+    category: CategoryOptions.food,
+  ),
+];
