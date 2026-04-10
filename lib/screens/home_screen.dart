@@ -30,13 +30,19 @@ class _HomeScreenState extends State<HomeScreen> {
         onToggleTask: _toggleTaskStatus,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
+        onPressed: () async {
+          final ToDoObject? newTask = await showModalBottomSheet<ToDoObject>(
             context: context,
             builder: (BuildContext context) {
-              return ModalContainer();
+              return const ModalContainer();
             },
           );
+
+          if (newTask != null) {
+            setState(() {
+              _activeList.add(newTask);
+            });
+          }
         },
         child: const Icon(Icons.add),
       ),

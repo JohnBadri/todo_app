@@ -10,6 +10,28 @@ class ModalContainer extends StatefulWidget {
 
 class _ModalContainerState extends State<ModalContainer> {
   var _selectedCategory = CategoryOptions.work;
+  final textController = TextEditingController();
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  void _addTask() {
+    final enteredText = textController.text.trim();
+
+    if (enteredText.isEmpty) {
+      return;
+    }
+
+    final newTask = ToDoObject(
+      title: enteredText,
+      isComplete: false,
+      category: _selectedCategory,
+    );
+    Navigator.pop(context, newTask);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +47,7 @@ class _ModalContainerState extends State<ModalContainer> {
             decoration: InputDecoration(
               labelText: 'Add the title',
             ),
+            controller: textController,
           ),
           SizedBox(
             height: 16.0,
@@ -56,9 +79,7 @@ class _ModalContainerState extends State<ModalContainer> {
             height: 16.0,
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: _addTask,
             child: Text('Add Task'),
           ),
         ],
